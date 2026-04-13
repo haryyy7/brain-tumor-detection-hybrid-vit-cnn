@@ -46,6 +46,8 @@ This project implements a state-of-the-art hybrid deep learning model that combi
 
 The hybrid model architecture consists of:
 
+![Model Architecture](./results/architecture.png)
+
 1. **Vision Transformer Branch (ViT-L16-fe)**
    - Pre-trained on ImageNet
    - Captures global context and long-range dependencies
@@ -220,6 +222,18 @@ The training process generates:
 - Confusion matrices
 - Classification reports
 - Per-class performance metrics
+
+- ### Training Progress
+
+![Training and Validation Curves](./results/training_curves.png)
+
+*Training and validation accuracy/loss curves showing model convergence*
+
+### Confusion Matrix
+
+![Confusion Matrix](./results/confusion_matrix.png)
+
+*Confusion matrix showing per-class prediction performance*
 
 All visualizations are saved in the `results/` directory.
 
