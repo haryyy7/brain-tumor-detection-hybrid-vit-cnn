@@ -1,14 +1,13 @@
-# Brain Tumor Detection using Hybrid Deep Learning
+# Brain Tumor Classification using Hybrid Deep Learning
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange)
-![License](https://img.shields.io/badge/License-MIT-green)
+![Python](https://img.shields.io/badge/Python-3.8+-blue) ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange) ![License](https://img.shields.io/badge/License-MIT-green) [![HuggingFace](https://img.shields.io/badge/🤗-Live_Demo-blue)](https://huggingface.co/spaces/haryyyy/Hybrid_VIT-CNN_BrainTumorClassifier) [![Kaggle](https://img.shields.io/badge/Kaggle-Notebook-20BEFF?logo=kaggle)](https://www.kaggle.com/code/harisankera/brain-tumor-classification-hybrid-deep-learning)
 
-An advanced deep learning solution for classifying brain tumors from MRI scans using a **Hybrid Vision Transformer (ViT-L16-fe) + Xception CNN** architecture. This project achieves **96%+ accuracy** in multi-class tumor classification.
+An advanced deep learning solution for classifying brain tumors from MRI scans using a **Hybrid Vision Transformer (ViT-L16) + Xception CNN** architecture. This project achieves **96%+ accuracy** in multi-class tumor classification.
 
 ## 🎯 Project Overview
 
 This project implements a state-of-the-art hybrid deep learning model that combines:
+
 - **Vision Transformer (ViT-L16-fe)** for global feature extraction and attention mechanisms
 - **Xception CNN** for local pattern detection and spatial feature learning
 
@@ -18,7 +17,8 @@ This project implements a state-of-the-art hybrid deep learning model that combi
 ✅ **Four-Class Classification**: Distinguishes between Glioma, Meningioma, Pituitary tumors, and No Tumor cases  
 ✅ **Hybrid Architecture**: Leverages both transformer and CNN strengths for superior performance  
 ✅ **Production-Ready**: Includes duplicate removal, data augmentation, and comprehensive evaluation metrics  
-✅ **Robust Training**: Features early stopping, learning rate scheduling, and model checkpointing
+✅ **Robust Training**: Features early stopping, learning rate scheduling, and model checkpointing  
+✅ **Live Demo**: Try the model on [HuggingFace Spaces](https://huggingface.co/spaces/haryyyy/Hybrid_VIT-CNN_BrainTumorClassifier)
 
 ## 📊 Model Performance
 
@@ -30,19 +30,17 @@ This project implements a state-of-the-art hybrid deep learning model that combi
 | **Test Samples** | 1,056 |
 | **Total Parameters** | 22.5M |
 | **Training Time** | ~3.5 hours (GPU P100) |
+| **Model File** | best_ViT-L16-fe-Xception.h5 |
 
-### Classification Report
+### Per-Class Performance Metrics
 
-```
-              precision    recall  f1-score   support
-
-      glioma       0.96      0.96      0.96       375
-   pituitary       0.97      0.99      0.98       271
-  meningioma       0.93      0.91      0.92       234
-    no_tumor       0.98      0.99      0.99       176
-
-    accuracy                           0.96      1056
-```
+| Class | Precision | Recall | F1-Score | Support |
+|-------|-----------|--------|----------|----------|
+| **Glioma** | 0.96 | 0.96 | 0.96 | 375 |
+| **Pituitary** | 0.97 | 0.99 | 0.98 | 271 |
+| **Meningioma** | 0.93 | 0.91 | 0.92 | 234 |
+| **No Tumor** | 0.98 | 0.99 | 0.99 | 176 |
+| **Overall Accuracy** | - | - | **0.96** | **1056** |
 
 ## 🏗️ Architecture
 
@@ -67,21 +65,21 @@ The hybrid model architecture consists of:
 
 ```
 brain-tumor-detection-hybrid-vit-cnn/
-├── notebooks/
-│   └── brain_tumor_detection.ipynb    # Main training notebook
-├── src/
+├── notebooks/              # Jupyter notebooks
+│   └── brain_tumor_detection.ipynb
+├── src/                    # Source code modules
 │   ├── models/
-│   │   └── hybrid_model.py            # Model architecture
+│   │   └── hybrid_model.py
 │   ├── data/
-│   │   └── preprocessing.py           # Data loading & preprocessing
+│   │   └── preprocessing.py
 │   └── utils/
-│       ├── callbacks.py               # Training callbacks
-│       └── metrics.py                 # Evaluation utilities
-├── models/                            # Saved model weights
-├── results/                           # Training results & visualizations
-├── requirements.txt                   # Project dependencies
-├── README.md                          # This file
-└── LICENSE                            # MIT License
+│       ├── callbacks.py
+│       └── metrics.py
+├── models/                 # Saved model weights
+├── results/                # Training results & visualizations
+├── requirements.txt        # Project dependencies
+├── README.md              # This file
+└── LICENSE                # MIT License
 ```
 
 ## 🚀 Getting Started
@@ -109,7 +107,7 @@ pip install -r requirements.txt
 
 ### Required Dependencies
 
-```txt
+```
 tensorflow>=2.10.0
 tensorflow-hub>=0.12.0
 numpy>=1.21.0
@@ -145,7 +143,7 @@ history = train_model(model, train_dataset, val_dataset)
 import tensorflow as tf
 
 # Load trained model
-model = tf.keras.models.load_model('models/best_model.h5')
+model = tf.keras.models.load_model('models/best_ViT-L16-fe-Xception.h5')
 
 # Preprocess image
 image = preprocess_image('path/to/mri_scan.jpg')
@@ -154,19 +152,25 @@ image = preprocess_image('path/to/mri_scan.jpg')
 prediction = model.predict(tf.expand_dims(image, 0))
 class_names = ['glioma', 'meningioma', 'no_tumor', 'pituitary']
 predicted_class = class_names[tf.argmax(prediction[0])]
-
 print(f"Predicted: {predicted_class}")
 print(f"Confidence: {tf.reduce_max(prediction[0]):.2%}")
 ```
 
+### Try the Live Demo
+
+Experience the model in action on [HuggingFace Spaces](https://huggingface.co/spaces/haryyyy/Hybrid_VIT-CNN_BrainTumorClassifier) — upload an MRI scan and get instant predictions!
+
 ## 🗄️ Dataset Information
 
-The model is trained on curated brain MRI datasets including:
-- **Brain MRI Images for Brain Tumor Detection**
-- **Brain Tumor Classification (MRI)**
-- **Brain Tumor Dataset**
+The model is trained on the [Brain Tumor MRI Dataset](https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset) from Kaggle, combining multiple curated brain MRI datasets.
+
+### Dataset Sources
+- Brain MRI Images for Brain Tumor Detection
+- Brain Tumor Classification (MRI)
+- Brain Tumor Dataset
 
 ### Data Preprocessing
+
 - Automatic duplicate removal using MD5 hashing
 - Label standardization across different naming conventions
 - Train/Validation/Test split: 70%/20%/10%
@@ -174,6 +178,7 @@ The model is trained on curated brain MRI datasets including:
 - Normalization: scaled to [-1, 1] range
 
 ### Class Distribution (After Duplicate Removal)
+
 - **Glioma**: 3,754 samples
 - **Pituitary**: 2,706 samples
 - **Meningioma**: 2,343 samples
@@ -183,6 +188,7 @@ The model is trained on curated brain MRI datasets including:
 ## 🎓 Model Training Details
 
 ### Hyperparameters
+
 ```python
 EPOCHS = 50
 IMG_SIZE = 224
@@ -193,11 +199,13 @@ TEST_SPLIT = 0.1
 ```
 
 ### Callbacks
+
 - **EarlyStopping**: Patience of 10 epochs, monitors validation loss
 - **ReduceLROnPlateau**: Factor 0.5, patience 5 epochs
 - **ModelCheckpoint**: Saves best model based on validation accuracy
 
 ### Data Augmentation (Optional)
+
 - Random horizontal flip
 - Random brightness adjustment
 - Random contrast variation
@@ -206,6 +214,7 @@ TEST_SPLIT = 0.1
 ## 📈 Results Visualization
 
 The training process generates:
+
 - Training/Validation accuracy curves
 - Training/Validation loss curves
 - Confusion matrices
@@ -257,4 +266,6 @@ GitHub: [@haryyy7](https://github.com/haryyy7)
 
 ---
 
-⭐ If you find this project helpful, please consider giving it a star!
+⭐ **If you find this project helpful, please consider giving it a star!**
+
+📊 **Explore the full training notebook on [Kaggle](https://www.kaggle.com/code/harisankera/brain-tumor-classification-hybrid-deep-learning)**
